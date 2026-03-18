@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bete Yared — Ethiopian Orthodox Youth Empowerment</title>
+  <meta name="description" content="Bete Yared empowers Ethiopian Orthodox youth by preserving and sharing the ancient wisdom of the Tewahedo faith for a modern generation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── TOKENS ─────────────────────────────────── */
+    :root {
+      --gold:         #C9A84C;
+      --gold-lt:      #E0C070;
+      --green:        #1A4731;
+      --green-mid:    #2a6b4a;
+      --crimson:      #8B1A1A;
+      --parch:        #FAF7F0;
+      --ivory:        #F0EBE1;
+      --ink:          #1C1C1E;
+      --taupe:        #A89880;
+      --shadow-g:     rgba(26,71,49,0.12);
+      --nav-h:        70px;
+    }
+
+    /* ─── SCROLL SNAP ────────────────────────────── */
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+      scroll-padding-top: var(--nav-h);
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--parch);
+      color: var(--ink);
+      overflow-x: hidden;
+      /* height must NOT be set on body — snapping lives on html */
+    }
+
+    /* Every major section = exactly one viewport */
+    section {
+      height: 100vh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      position: relative;
+      /* NO overflow-y here — snapping must use the html scroller */
+      overflow: hidden;
+    }
+
+    footer {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    /* ─── TYPOGRAPHY ──────────────────────────────── */
+    h1, .cinzel,
+    .nav-wordmark-title,
+    .footer-brand,
+    .anchor-title {
+      font-family: 'Cinzel', 'Trajan Pro', Georgia, serif;
+    }
+
+    /* ─── NAVBAR ─────────────────────────────────── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.25rem, 5vw, 3.5rem);
+      background: rgba(26,71,49,0.92);
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
+      border-bottom: 1px solid rgba(201,168,76,0.35);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+      transition: background 0.3s ease;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    /* Cross — NO color-stripping; original colors + depth shadow */
+    .nav-brand-cross {
+      width: 30px;
+      height: auto;
+      flex-shrink: 0;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+    }
+
+    .nav-wordmark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .nav-wordmark-title {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--parch);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-wordmark-sub {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.58rem;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Lora', Georgia, serif;
+      color: rgba(250,247,240,0.82);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 3px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--gold);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--parch); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      padding: 0.42rem 1.1rem !important;
+      border: 1.5px solid var(--gold) !important;
+      color: var(--gold) !important;
+      border-radius: 2px;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold) !important;
+      color: var(--green) !important;
+    }
+
+    .nav-cta::after { display: none !important; }
+
+    #menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    #menu-toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--parch);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ─── HERO ────────────────────────────────────── */
+    #hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Parallax background — inset gives travel room */
+    .hero-bg {
+      position: absolute;
+      inset: -12% 0;
+      background: url('bete_yared_hero_bg_1773187118434.png')
+                  center / cover no-repeat;
+      filter: blur(3px) brightness(0.72) saturate(1.1);
+      will-change: transform;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(26,71,49,0.58) 0%,
+        rgba(100,65,10,0.22) 50%,
+        rgba(26,71,49,0.70) 100%
+      );
+    }
+
+    .hero-shimmer {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        ellipse 60% 38% at 50% 42%,
+        rgba(201,168,76,0.13) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    /* Content column — centred in the full viewport */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      /* Push down from navbar; bottom padding reserves room for scroll cue */
+      padding: calc(var(--nav-h) + 0.75rem) 1.5rem 5rem;
+      justify-content: center;
+    }
+
+    /*
+      anchor-wrap:
+        - position:relative → cross is measured from THIS element's top
+        - margin-top provides clearance above the protruding cross
+    */
+    .anchor-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 44px; /* half-cross clears navbar */
+    }
+
+    /*
+      Cross straddles the top border of the white box:
+        top: 0           → aligns with box's top edge
+        translateY(-50%) → lifts element so its centre is on that edge
+        → top half floats above, bottom half inside the box
+    */
+    .anchor-cross-img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      /* NO color-stripping; original SVG colours + depth shadow */
+      transform: translate(-50%, -50%);
+      width: 72px;
+      height: auto;
+      z-index: 10;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+      pointer-events: none;
+    }
+
+    /* White Identity Box */
+    .identity-anchor {
+      background: rgba(255,255,255,0.97);
+      border-radius: 5px;
+      width: 100%;
+      /* top padding = half of cross height (72px wide × ~1.4 ratio ≈ 101px tall → 50px) */
+      padding: 56px clamp(1.5rem, 4vw, 3rem) 1.5rem;
+      box-shadow:
+        0 2px 0 rgba(201,168,76,0.45),
+        0 0 0 1px rgba(201,168,76,0.18),
+        0 28px 70px rgba(0,0,0,0.28),
+        0 6px 20px rgba(0,0,0,0.14);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      animation: riseIn 0.9s 0.2s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Top accent bar */
+    .identity-anchor::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg,
+        transparent, var(--gold), var(--gold-lt), var(--gold), transparent);
+    }
+
+    /* Watermark cross — bottom-right, no colour strip, very faint */
+    .anchor-watermark {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.9rem;
+      width: 64px;
+      height: auto;
+      opacity: 0.08;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+
+    .anchor-eyebrow {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.64rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+
+    .anchor-title {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.95rem, 4.5vw, 3.1rem);
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1.08;
+      letter-spacing: 0.04em;
+    }
+
+    .anchor-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    /* ── Angel Divider ──
+       The angel SVG is a full-colour raster embed.
+       NO CSS filters — show its original green wings, orange face, black outlines.
+       Flanked by two tapered gold lines.
+    */
+    .anchor-rule {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 340px;
+      margin: 0.05rem auto;
+    }
+
+    .anchor-rule-line {
+      flex: 1;
+      height: 1px;
+    }
+
+    .anchor-rule-line:first-child {
+      background: linear-gradient(to left,
+        var(--gold) 0%, var(--gold) 52%, transparent 100%);
+    }
+
+    .anchor-rule-line:last-child {
+      background: linear-gradient(to right,
+        var(--gold) 0%, var(--gold) 52%, transparent 100%);
+    }
+
+    /* Angel image — ORIGINAL COLOURS, no filter */
+    .anchor-angel {
+      flex-shrink: 0;
+      width: 56px;
+      height: auto;
+      margin: 0 10px;
+      display: block;
+      /* No filter — show original SVG colours exactly as provided */
+    }
+
+    .anchor-sub {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: #555;
+      max-width: 390px;
+      font-weight: 400;
+      text-align: center;
+    }
+
+    .anchor-buttons {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* ─── BUTTONS ─────────────────────────────────── */
+    .btn-primary {
+      padding: 0.68rem 1.55rem;
+      background: var(--green);
+      color: var(--gold);
+      border: 1.5px solid var(--green);
+      border-radius: 2px;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--green);
+      border-color: var(--gold);
+    }
+
+    .btn-outline {
+      padding: 0.68rem 1.55rem;
+      background: transparent;
+      color: var(--green);
+      border: 1.5px solid var(--gold);
+      border-radius: 2px;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--gold);
+      color: var(--green);
+    }
+
+    /*
+      Scroll cue — position:absolute on #hero, pinned to bottom.
+      This guarantees it is BELOW the identity box regardless of box height.
+      The hero-content has padding-bottom: 5rem which keeps the box from
+      reaching all the way to the section bottom.
+    */
+    .scroll-cue {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.38rem;
+      color: rgba(250,247,240,0.5);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      animation: fadeUp 1.6s 1.4s ease both;
+      white-space: nowrap;
+    }
+
+    .scroll-cue .sc-line {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, rgba(201,168,76,0.75), transparent);
+      animation: scrollPulse 1.9s ease-in-out infinite;
+    }
+
+    /* ─── SHARED SECTION LAYOUT ───────────────────── */
+    /*
+      .sec-inner is a regular block inside the section.
+      We use flexbox on the section itself to centre it.
+      NO overflow-y: auto — that would intercept the main scroll.
+    */
+    section > .sec-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /*
+        Equal top & bottom padding means flexbox truly centres the content.
+        var(--nav-h) on top prevents content sliding under the fixed navbar;
+        matching it on the bottom keeps the visual centre correct.
+      */
+      padding: var(--nav-h) clamp(1.25rem, 5vw, 4rem) var(--nav-h);
+    }
+
+    .sec-inner {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .section-eyebrow {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-eyebrow::before,
+    .section-eyebrow::after {
+      content: '';
+      flex: 1;
+      max-width: 36px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.45;
+    }
+
+    .section-heading {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(1.45rem, 3vw, 2.3rem);
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1.15;
+      text-align: center;
+      margin-bottom: 1.6rem;
+    }
+
+    /* ─── DASHBOARD ───────────────────────────────── */
+    #dashboard { background: var(--parch); }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.1rem;
+    }
+
+    .dash-card {
+      background: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(201,168,76,0.12),
+        0 4px 16px var(--shadow-g);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .dash-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 0 0 1px rgba(201,168,76,0.28),
+        0 12px 40px rgba(26,71,49,0.16);
+    }
+
+    .card-band { height: 4px; width: 100%; }
+    .card-band.gold    { background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
+    .card-band.green   { background: linear-gradient(90deg, var(--green), var(--green-mid)); }
+    .card-band.crimson { background: linear-gradient(90deg, var(--crimson), #b52929); }
+    .card-band.teal    { background: linear-gradient(90deg, #1a7070, #2aa0a0); }
+
+    .card-body {
+      padding: 1.1rem 1.25rem 0.9rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .card-icon-wrap {
+      width: 38px; height: 38px;
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.1rem;
+    }
+
+    .icon-gold    { background: rgba(201,168,76,0.11); }
+    .icon-green   { background: rgba(26,71,49,0.09); }
+    .icon-crimson { background: rgba(139,26,26,0.09); }
+    .icon-teal    { background: rgba(26,112,112,0.09); }
+    .card-icon-wrap svg { width: 19px; height: 19px; }
+
+    .card-label {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.59rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+
+    .card-title {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1.2;
+    }
+
+    .card-desc {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.81rem;
+      color: #666;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .card-footer {
+      padding: 0.75rem 1.25rem 1rem;
+      border-top: 1px solid rgba(201,168,76,0.13);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-meta {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.63rem;
+      color: var(--taupe);
+      letter-spacing: 0.04em;
+    }
+
+    .card-arrow {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .dash-card:hover .card-arrow { background: var(--gold); }
+    .dash-card:hover .card-arrow svg path { stroke: var(--green); }
+
+    /* ─── ABOUT ───────────────────────────────────── */
+    #about { background: var(--parch); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .about-body {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.92rem;
+      line-height: 1.9;
+      color: #444;
+      font-weight: 400;
+    }
+
+    .pastor-card {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 1rem 1.3rem;
+      background: var(--ivory);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-left: 3px solid var(--gold);
+      border-radius: 4px;
+      margin-top: 1.4rem;
+    }
+
+    .pastor-avatar {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      border: 2px solid var(--gold);
+    }
+
+    .pastor-avatar svg { width: 23px; height: 23px; fill: var(--gold); }
+
+    .pastor-name {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--green);
+      display: block;
+      letter-spacing: 0.02em;
+    }
+
+    .pastor-role {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.63rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      display: block;
+      margin-top: 0.12rem;
+    }
+
+    .about-pullquote {
+      background: var(--green);
+      color: var(--parch);
+      padding: 1.9rem 2.1rem;
+      border-radius: 5px;
+      box-shadow: 0 8px 36px rgba(26,71,49,0.22);
+    }
+
+    .about-pullquote blockquote {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--parch);
+    }
+
+    .about-pullquote cite {
+      display: block;
+      margin-top: 0.85rem;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.61rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* ─── BIBLE CLASSES ───────────────────────────── */
+    #bible-ed { background: var(--ivory); }
+
+    .class-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.1rem;
+      margin-top: 1.1rem;
+    }
+
+    .class-card {
+      background: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.12), 0 4px 16px var(--shadow-g);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .class-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.28), 0 12px 36px rgba(26,71,49,0.16);
+    }
+
+    .class-card-body { padding: 1.15rem 1.4rem 0.9rem; flex: 1; }
+
+    .class-round {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.57rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .class-title {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1.25;
+    }
+
+    .class-foot {
+      padding: 0.65rem 1.4rem 0.95rem;
+      border-top: 1px solid rgba(201,168,76,0.12);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.67rem;
+      color: var(--taupe);
+      letter-spacing: 0.03em;
+      line-height: 1.5;
+    }
+
+    /* ─── ENROLL ──────────────────────────────────── */
+    #enroll { background: var(--parch); }
+
+    .enroll-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 1.1rem;
+    }
+
+    .enroll-why h3 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 0.8rem;
+    }
+
+    .enroll-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .enroll-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    .enroll-list li::before {
+      content: '';
+      display: inline-block;
+      flex-shrink: 0;
+      width: 14px; height: 14px;
+      margin-top: 4px;
+      background: var(--gold);
+      clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,
+                          50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+    }
+
+    .form-card {
+      background: #fff;
+      border-radius: 5px;
+      padding: 1.85rem;
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.14), 0 8px 28px var(--shadow-g);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg,
+        transparent, var(--gold), var(--gold-lt), var(--gold), transparent);
+    }
+
+    .form-card h3 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 1.2rem;
+    }
+
+    .form-row { margin-bottom: 0.85rem; }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .form-label {
+      display: block;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.61rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 0.28rem;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 0.52rem 0.78rem;
+      border: 1.5px solid rgba(201,168,76,0.25);
+      border-radius: 3px;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.86rem;
+      color: var(--ink);
+      background: var(--parch);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.11);
+    }
+
+    .form-required { color: var(--crimson); margin-left: 2px; }
+
+    .form-submit {
+      width: 100%;
+      margin-top: 0.35rem;
+      padding: 0.72rem;
+      background: var(--green);
+      color: var(--gold);
+      border: 1.5px solid var(--green);
+      border-radius: 2px;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .form-submit:hover {
+      background: var(--gold);
+      color: var(--green);
+      border-color: var(--gold);
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 1.4rem;
+      color: var(--green);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    /* ─── DONATION ────────────────────────────────── */
+    #donate {
+      background: var(--green);
+      border-top: 2px solid rgba(201,168,76,0.22);
+    }
+
+    #donate > .sec-wrap { align-items: center; }
+
+    .donate-inner {
+      max-width: 580px;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+    }
+
+    .donate-heading {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      font-weight: 700;
+      color: var(--parch);
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+
+    .donate-heading em { font-style: italic; color: var(--gold); }
+
+    .donate-sub {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.86rem;
+      color: rgba(250,247,240,0.58);
+      font-weight: 400;
+      margin-bottom: 1.6rem;
+      line-height: 1.62;
+    }
+
+    /* Frequency toggle */
+    .donate-freq {
+      display: inline-flex;
+      align-items: stretch;
+      border: 1.5px solid rgba(201,168,76,0.38);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 0.55rem;
+    }
+
+    .freq-btn {
+      padding: 0.46rem 1.45rem;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.71rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(250,247,240,0.5);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    .freq-btn.active {
+      background: var(--gold);
+      color: var(--green);
+    }
+
+    .freq-sep {
+      width: 1px;
+      background: rgba(201,168,76,0.3);
+      flex-shrink: 0;
+    }
+
+    .donate-freq-note {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.67rem;
+      color: rgba(250,247,240,0.38);
+      letter-spacing: 0.06em;
+      margin-bottom: 1.35rem;
+      min-height: 1rem;
+    }
+
+    .donate-amounts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.58rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .amount-btn {
+      padding: 0.48rem 1.25rem;
+      border: 1.5px solid rgba(201,168,76,0.42);
+      background: transparent;
+      color: var(--gold);
+      border-radius: 2px;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
+    }
+
+    .amount-btn:hover, .amount-btn.active {
+      background: var(--gold);
+      color: var(--green);
+      border-color: var(--gold);
+    }
+
+    .donate-custom-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1.3rem;
+      flex-wrap: wrap;
+    }
+
+    .donate-custom-label {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.67rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(250,247,240,0.5);
+    }
+
+    .donate-custom-input {
+      padding: 0.48rem 0.82rem;
+      border: 1.5px solid rgba(201,168,76,0.38);
+      background: rgba(255,255,255,0.07);
+      color: var(--parch);
+      border-radius: 3px;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.9rem;
+      width: 128px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .donate-custom-input:focus { border-color: var(--gold); }
+    .donate-custom-input::placeholder { color: rgba(250,247,240,0.32); }
+
+    /* GiveButter container */
+    #givebutter-widget-container {
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto 0.75rem;
+      min-height: 54px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .gb-placeholder-text {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.67rem;
+      color: rgba(250,247,240,0.28);
+      letter-spacing: 0.08em;
+    }
+
+    .btn-donate {
+      padding: 0.7rem 2.3rem;
+      background: var(--gold);
+      color: var(--green);
+      border: 1.5px solid var(--gold);
+      border-radius: 2px;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+
+    .btn-donate:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+
+    .donate-legal {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.63rem;
+      color: rgba(250,247,240,0.3);
+      margin-top: 1rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── LOCATION ────────────────────────────────── */
+    #location { background: var(--parch); }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 2.6rem;
+      align-items: start;
+      margin-top: 1.1rem;
+    }
+
+    .map-wrap {
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(201,168,76,0.18),
+        0 8px 26px var(--shadow-g);
+    }
+
+    .map-wrap iframe { width: 100%; height: 280px; display: block; border: none; }
+
+    .location-info { display: flex; flex-direction: column; gap: 1rem; }
+
+    .loc-row { display: flex; align-items: flex-start; gap: 0.78rem; }
+
+    .loc-icon {
+      width: 31px; height: 31px;
+      border-radius: 4px;
+      background: rgba(201,168,76,0.11);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .loc-icon svg {
+      width: 15px; height: 15px;
+      stroke: var(--gold); fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .loc-label {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.59rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      display: block;
+      margin-bottom: 0.16rem;
+    }
+
+    .loc-value {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.86rem;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    .loc-value a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ─── VOICE ───────────────────────────────────── */
+    #voice { background: var(--ivory); border-top: 1px solid rgba(201,168,76,0.18); }
+
+    #voice > .sec-wrap { text-align: center; flex-direction: column; gap: 0.5rem; }
+
+    .voice-tagline {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(1.35rem, 2.9vw, 2.1rem);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--green);
+      line-height: 1.35;
+      max-width: 640px;
+      margin: 0.75rem auto;
+    }
+
+    .voice-tagline em { font-style: normal; color: var(--gold); }
+
+    .voice-sub {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.87rem;
+      color: var(--taupe);
+      margin-top: 0.65rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--green);
+      padding: 2.4rem clamp(1.25rem, 5vw, 4rem) 2rem;
+      text-align: center;
+      color: rgba(250,247,240,0.48);
+    }
+
+    .footer-brand {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.28rem;
+    }
+
+    footer p {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.77rem;
+      margin-top: 0.3rem;
+    }
+
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ─── KEYFRAMES ───────────────────────────────── */
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(26px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.35; transform: scaleY(0.55); transform-origin: top; }
+      50%     { opacity: 1;    transform: scaleY(1);    transform-origin: top; }
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 1000px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .class-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+      }
+
+      .nav-links.open {
+        display: flex;
+        position: fixed;
+        top: var(--nav-h); left: 0; right: 0;
+        background: rgba(26,71,49,0.97);
+        padding: 1.4rem;
+        gap: 1.2rem;
+        border-top: 1px solid rgba(201,168,76,0.28);
+        backdrop-filter: blur(16px);
+        z-index: 999;
+      }
+
+      #menu-toggle { display: flex; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .class-grid { grid-template-columns: 1fr; }
+      .about-grid, .enroll-grid, .location-grid { grid-template-columns: 1fr; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .anchor-buttons { flex-direction: column; align-items: stretch; }
+      .btn-primary, .btn-outline { text-align: center; }
+
+      /* On mobile, disable mandatory snap — touch momentum feels wrong with it */
+      html { scroll-snap-type: none; }
+      section {
+        height: auto;
+        overflow: visible;
+      }
+      section > .sec-wrap {
+        position: static;
+        padding: calc(var(--nav-h) + 0.75rem) 1.25rem 1.5rem;
+        min-height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+
+    <a href="#hero" class="nav-brand" aria-label="Bete Yared Home">
+      <!--
+        Navbar cross: original SVG colors, no brightness/invert filters.
+        Only drop-shadow for depth.
+      -->
+      <img src="cross.svg"
+           class="nav-brand-cross"
+           alt=""
+           aria-hidden="true" />
+      <div class="nav-wordmark">
+        <span class="nav-wordmark-title">Bete Yared</span>
+        <span class="nav-wordmark-sub">For the Orthodox</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#bible-ed">Bible Class</a></li>
+      <li><a href="#donate">Give</a></li>
+      <li><a href="#location">Visit</a></li>
+      <li><a href="#enroll" class="nav-cta">Register</a></li>
+    </ul>
+
+    <button id="menu-toggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section id="hero" aria-label="Hero — Bete Yared">
+
+    <div class="hero-bg"
+         role="img"
+         aria-label="Interior of an Ethiopian Orthodox church bathed in golden candlelight">
+    </div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-shimmer"  aria-hidden="true"></div>
+
+    <!-- hero-content: vertically centred, with padding-bottom that
+         keeps the box from ever reaching the scroll-cue zone -->
+    <div class="hero-content">
+
+      <!--
+        anchor-wrap:
+          position:relative — cross positions relative to THIS element
+          margin-top:44px   — lifts wrap so the protruding cross top half
+                               clears the navbar comfortably
+      -->
+      <div class="anchor-wrap">
+
+        <!--
+          Straddling cross:
+            position:absolute; top:0; transform:translate(-50%,-50%)
+            ► centre of image sits exactly on the white box's top border
+            ► top half floats above (over background)
+            ► bottom half sits inside (inside padding absorbs it)
+          Filter: drop-shadow only — NO color-stripping.
+        -->
+        <img src="cross.svg"
+             class="anchor-cross-img"
+             alt="Ethiopian Orthodox Meskel Cross"
+             draggable="false" />
+
+        <!-- White Identity Box -->
+        <div class="identity-anchor" role="main">
+
+          <!-- Bottom-right watermark — very faint, original colours -->
+          <img src="cross.svg"
+               class="anchor-watermark"
+               alt=""
+               aria-hidden="true"
+               draggable="false" />
+
+          <p class="anchor-eyebrow">Heritage · Faith · Identity</p>
+
+          <!-- H1 in Cinzel -->
+          <h1 class="anchor-title">Bete <em>Yared</em></h1>
+
+          <!--
+            Angel divider:
+              NO CSS filter — angel.svg shows its full original colours
+              (green wings, orange/gold face, black outlines)
+              flanked by two tapered gold lines
+          -->
+          <div class="anchor-rule" aria-hidden="true">
+            <span class="anchor-rule-line"></span>
+            <img src="angel.svg"
+                 class="anchor-angel"
+                 alt=""
+                 draggable="false" />
+            <span class="anchor-rule-line"></span>
+          </div>
+
+          <p class="anchor-sub">
+            Rooted in sixteen centuries of sacred tradition.
+            Rising to meet a generation hungry for truth.
+          </p>
+
+          <div class="anchor-buttons">
+            <a href="#dashboard" class="btn-primary">Explore Resources</a>
+            <a href="#enroll"    class="btn-outline">Register for Bible Class</a>
+          </div>
+
+        </div><!-- /.identity-anchor -->
+      </div><!-- /.anchor-wrap -->
+
+    </div><!-- /.hero-content -->
+
+    <!--
+      Scroll cue — position:absolute; bottom:1.25rem
+      Guaranteed to sit below the identity box because:
+        1. hero-content has padding-bottom:5rem, so the box never
+           fills the bottom 5rem of the hero section
+        2. This element is absolutely positioned relative to #hero,
+           not inside hero-content, so it is always at the section bottom
+    -->
+    <div class="scroll-cue" aria-hidden="true">
+      <div class="sc-line"></div>
+      <span>Scroll</span>
+    </div>
+
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       DASHBOARD — Updates and Resources
+  ═══════════════════════════════════════════ -->
+  <section id="dashboard" aria-labelledby="dash-heading">
+    <div class="sec-wrap">
+      <div class="sec-inner">
+
+        <p class="section-eyebrow">Explore</p>
+        <h2 class="section-heading" id="dash-heading">Updates and Resources</h2>
+
+        <div class="cards-grid">
+
+          <!-- Card 1: Updates -->
+          <a href="#" class="dash-card" aria-label="Latest Updates and Announcements">
+            <div class="card-band gold"></div>
+            <div class="card-body">
+              <div class="card-icon-wrap icon-gold">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C"
+                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                </svg>
+              </div>
+              <span class="card-label">Latest</span>
+              <h3 class="card-title">Updates &amp; Announcements</h3>
+              <p class="card-desc">Class schedules, community events, and pastoral messages from Kesis Yared Gebremedhin.</p>
+            </div>
+            <div class="card-footer">
+              <span class="card-meta">Updated weekly</span>
+              <div class="card-arrow">
+                <svg viewBox="0 0 16 16" fill="none" width="12" height="12">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="#C9A84C"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 2: Publications -->
+          <a href="#" class="dash-card" aria-label="Tewahedo Publications">
+            <div class="card-band green"></div>
+            <div class="card-body">
+              <div class="card-icon-wrap icon-green">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1A4731"
+                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+              </div>
+              <span class="card-label">Scripture &amp; Study</span>
+              <h3 class="card-title">Tewahedo Publications</h3>
+              <p class="card-desc">Theological papers, Ge'ez readings, and the full 81-book Orthodox canon — annotated and accessible.</p>
+            </div>
+            <div class="card-footer">
+              <span class="card-meta">81-book canon · PDF &amp; audio</span>
+              <div class="card-arrow">
+                <svg viewBox="0 0 16 16" fill="none" width="12" height="12">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="#C9A84C"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 3: Blogs -->
+          <a href="#" class="dash-card" aria-label="Reflections and Blogs">
+            <div class="card-band crimson"></div>
+            <div class="card-body">
+              <div class="card-icon-wrap icon-crimson">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#8B1A1A"
+                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                </svg>
+              </div>
+              <span class="card-label">Bete Yared's Voice</span>
+              <h3 class="card-title">Reflections &amp; Blogs</h3>
+              <p class="card-desc">Essays on faith, identity, and what it means to be young, Orthodox, and Ethiopian in the modern world.</p>
+            </div>
+            <div class="card-footer">
+              <span class="card-meta">New posts every month</span>
+              <div class="card-arrow">
+                <svg viewBox="0 0 16 16" fill="none" width="12" height="12">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="#C9A84C"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 4: Christian Counseling -->
+          <a href="#" class="dash-card" aria-label="Christian Counseling Resources">
+            <div class="card-band teal"></div>
+            <div class="card-body">
+              <div class="card-icon-wrap icon-teal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1a7070"
+                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+              </div>
+              <span class="card-label">Pastoral Care</span>
+              <h3 class="card-title">Christian Counseling</h3>
+              <p class="card-desc">Orthodox-centered counseling literature, blogs, and news guided by Kesis Yared's PhD-level expertise.</p>
+            </div>
+            <div class="card-footer">
+              <span class="card-meta">Resources &amp; referrals</span>
+              <div class="card-arrow">
+                <svg viewBox="0 0 16 16" fill="none" width="12" height="12">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="#C9A84C"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+        </div><!-- /.cards-grid -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT — Founder
+  ═══════════════════════════════════════════ -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="sec-wrap">
+      <div class="sec-inner">
+
+        <p class="section-eyebrow">Our Foundation</p>
+        <h2 class="section-heading" id="about-heading">Who We Are</h2>
+
+        <div class="about-grid">
+
+          <div>
+            <p class="about-body">
+              Melake Selam Kesis (Priest) Yared Gebremedhin is the head of the
+              Debre Selam Kidus Gabriel Orthodox Tewahedo Church in Columbus, Ohio.
+              Having founded and led the church for 16 years, Kesis Yared holds a
+              PhD in Christian Counseling from Northwestern Christian University.
+              He has guided myriads of youth into becoming responsible Christian
+              adults. Bete Yared strengthens youth through biblical education and
+              Christian counseling.
+            </p>
+
+            <div class="pastor-card">
+              <div class="pastor-avatar">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                           7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6
+                           1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+              </div>
+              <div>
+                <span class="pastor-name">Kesis Yared Gebremedhin</span>
+                <span class="pastor-role">Founder &amp; Head Priest · PhD in Christian Counseling, NCU</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-pullquote">
+            <blockquote>
+              &ldquo;Ancient words. Honest voices. One faith — passed
+              from generation to generation, without compromise.&rdquo;
+            </blockquote>
+            <cite>— Bete Yared Mission Statement</cite>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       BIBLE EDUCATION
+  ═══════════════════════════════════════════ -->
+  <section id="bible-ed" aria-labelledby="bible-heading">
+    <div class="sec-wrap">
+      <div class="sec-inner">
+
+        <p class="section-eyebrow">Tewahedo Scripture</p>
+        <h2 class="section-heading" id="bible-heading">Bible Education Classes</h2>
+
+        <div class="class-grid">
+
+          <div class="class-card">
+            <div class="card-band gold"></div>
+            <div class="class-card-body">
+              <span class="class-round">Round 1</span>
+              <h3 class="class-title">Acts of the Apostles</h3>
+            </div>
+            <div class="class-foot">Wednesday, 9:00 pm – 10:30 pm · Online</div>
+          </div>
+
+          <div class="class-card">
+            <div class="card-band green"></div>
+            <div class="class-card-body">
+              <span class="class-round">Round 2</span>
+              <h3 class="class-title">Matthew's Gospel</h3>
+            </div>
+            <div class="class-foot">Wednesday, 9:00 pm – 10:30 pm · Online</div>
+          </div>
+
+          <div class="class-card">
+            <div class="card-band crimson"></div>
+            <div class="class-card-body">
+              <span class="class-round">Round 3</span>
+              <h3 class="class-title">St. Paul's Letters Part 1</h3>
+            </div>
+            <div class="class-foot">Wednesday, 9:00 pm – 10:30 pm · Online</div>
+          </div>
+
+          <div class="class-card">
+            <div class="card-band gold"></div>
+            <div class="class-card-body">
+              <span class="class-round">Round 4</span>
+              <h3 class="class-title">St. Paul's Letters Part 2</h3>
+            </div>
+            <div class="class-foot">Wednesday, 9:00 pm – 10:30 pm · Online</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       ENROLLMENT FORM
+  ═══════════════════════════════════════════ -->
+  <section id="enroll" aria-labelledby="enroll-heading">
+    <div class="sec-wrap">
+      <div class="sec-inner">
+
+        <p class="section-eyebrow">Join Bete Yared</p>
+        <h2 class="section-heading" id="enroll-heading">Register for Bible Class</h2>
+
+        <div class="enroll-grid">
+
+          <!-- Why enroll — exactly 3 items as specified -->
+          <div class="enroll-why">
+            <h3>Why Enroll?</h3>
+            <ul class="enroll-list">
+              <li>Benefit from Melakeselam's immense knowledge and wisdom in EOTC's biblical teaching</li>
+              <li>Safe, welcoming community for all diaspora</li>
+              <li>All programs are completely free — no tuition, no fees</li>
+            </ul>
+          </div>
+
+          <!-- Form: Email + Phone side-by-side, no Student Age, no Notes -->
+          <div class="form-card">
+            <h3>Enrollment Application</h3>
+            <form id="enrollment-form" novalidate>
+
+              <div class="form-row-2">
+                <div>
+                  <label class="form-label" for="f-first">
+                    First Name<span class="form-required">*</span>
+                  </label>
+                  <input id="f-first" class="form-input" type="text"
+                         placeholder="Yared" required autocomplete="given-name" />
+                </div>
+                <div>
+                  <label class="form-label" for="f-last">
+                    Last Name<span class="form-required">*</span>
+                  </label>
+                  <input id="f-last" class="form-input" type="text"
+                         placeholder="Tesfaye" required autocomplete="family-name" />
+                </div>
+              </div>
+
+              <!-- Email and Phone side-by-side -->
+              <div class="form-row-2">
+                <div>
+                  <label class="form-label" for="f-email">
+                    Email<span class="form-required">*</span>
+                  </label>
+                  <input id="f-email" class="form-input" type="email"
+                         placeholder="you@example.com" required autocomplete="email" />
+                </div>
+                <div>
+                  <label class="form-label" for="f-phone">Phone</label>
+                  <input id="f-phone" class="form-input" type="tel"
+                         placeholder="+1 (614) 000-0000" autocomplete="tel" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <label class="form-label" for="f-class">
+                  Class Interest<span class="form-required">*</span>
+                </label>
+                <select id="f-class" class="form-select" required>
+                  <option value="" disabled selected>Select a class</option>
+                  <option>Acts of the Apostles (Round 1)</option>
+                  <option>Matthew's Gospel (Round 2)</option>
+                  <option>St. Paul's Letters Part 1 (Round 3)</option>
+                  <option>St. Paul's Letters Part 2 (Round 4)</option>
+                </select>
+              </div>
+
+              <button type="submit" class="form-submit">Submit Application</button>
+            </form>
+
+            <div class="form-success" id="form-success" role="status">
+              ✝ &nbsp;Thank you! We will be in touch within 2 business days.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       DONATION — Frequency Toggle + GiveButter
+  ═══════════════════════════════════════════ -->
+  <section id="donate" aria-labelledby="donate-heading">
+    <div class="sec-wrap">
+      <div class="donate-inner">
+
+        <p class="section-eyebrow"
+           style="color:rgba(250,247,240,0.48);">Support the Ministry</p>
+
+        <h2 class="donate-heading" id="donate-heading">
+          Invest in the <em>Next Generation</em>
+        </h2>
+
+        <p class="donate-sub">
+          Bete Yared is a non-profit 501(c)(3) organisation. Every donation goes
+          directly to teaching materials, youth programs, and counseling outreach.
+          100% tax-deductible.
+        </p>
+
+        <!-- Frequency Toggle -->
+        <div class="donate-freq" role="group" aria-label="Donation frequency">
+          <button class="freq-btn active"
+                  data-freq="once"
+                  id="freq-once"
+                  type="button">One-time</button>
+          <div class="freq-sep" aria-hidden="true"></div>
+          <button class="freq-btn"
+                  data-freq="monthly"
+                  id="freq-monthly"
+                  type="button">Monthly Recurring</button>
+        </div>
+
+        <p class="donate-freq-note" id="donate-freq-note" aria-live="polite">
+          A single gift, processed securely.
+        </p>
+
+        <div class="donate-amounts" role="group" aria-label="Select donation amount">
+          <button class="amount-btn"        data-amount="10"  type="button">$10</button>
+          <button class="amount-btn active" data-amount="25"  type="button">$25</button>
+          <button class="amount-btn"        data-amount="50"  type="button">$50</button>
+          <button class="amount-btn"        data-amount="100" type="button">$100</button>
+          <button class="amount-btn"        data-amount="250" type="button">$250</button>
+        </div>
+
+        <div class="donate-custom-row">
+          <span class="donate-custom-label">Custom amount:</span>
+          <input class="donate-custom-input"
+                 id="custom-amount"
+                 type="number"
+                 min="1"
+                 placeholder="$  0.00"
+                 aria-label="Enter custom donation amount" />
+        </div>
+
+        <!--
+          ══════════════════════════════════════════════════════
+          GIVEBUTTER WIDGET CONTAINER
+          ──────────────────────────────────────────────────────
+          Replace the placeholder button below with your GiveButter
+          embed code. The data-freq attribute is kept in sync with the
+          frequency toggle via JavaScript so GiveButter can read it.
+
+          OPTION A — Script widget:
+            <script src="https://givebutter.com/js/widget.js"></script>
+            <givebutter-widget id="YOUR_CAMPAIGN_ID"></givebutter-widget>
+
+          OPTION B — Iframe embed:
+            <iframe src="https://givebutter.com/embed/YOUR_SLUG"
+                    width="100%" height="560" frameborder="0"
+                    style="border-radius:4px;"></iframe>
+
+          OPTION C — Hosted link button:
+            <a class="btn-donate" href="https://givebutter.com/YOUR_SLUG"
+               target="_blank" rel="noopener">Donate via GiveButter</a>
+          ══════════════════════════════════════════════════════
+        -->
+        <div id="givebutter-widget-container"
+             data-freq="once"
+             aria-label="Secure donation via GiveButter">
+          <button class="btn-donate" id="donate-btn" type="button">
+            Donate Securely
+          </button>
+          <span class="gb-placeholder-text" id="gb-placeholder">
+            Secure checkout powered by GiveButter
+          </span>
+        </div>
+
+        <p class="donate-legal">
+          Bete Yared &nbsp;·&nbsp; EIN: 00-0000000 &nbsp;·&nbsp;
+          1049 E Broad St, Columbus OH 43205 &nbsp;·&nbsp;
+          Donations processed via GiveButter secure checkout.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       LOCATION / MAP
+  ═══════════════════════════════════════════ -->
+  <section id="location" aria-labelledby="location-heading">
+    <div class="sec-wrap">
+      <div class="sec-inner">
+
+        <p class="section-eyebrow">Find Us</p>
+        <h2 class="section-heading" id="location-heading">Come &amp; Worship With Us</h2>
+
+        <div class="location-grid">
+
+          <div class="map-wrap">
+            <iframe
+              title="Debre Selam Kidus Gabriel Church Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.123456!2d-82.999!3d39.961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88388f4a1234abcd%3A0x0!2s1049+E+Broad+St%2C+Columbus%2C+OH+43205!5e0!3m2!1sen!2sus!4v1234567890"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+
+          <div class="location-info">
+
+            <div class="loc-row">
+              <div class="loc-icon">
+                <svg viewBox="0 0 24 24" fill="var(--gold)" stroke="none">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75
+                           7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5
+                           S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+                </svg>
+              </div>
+              <div>
+                <span class="loc-label">Address</span>
+                <span class="loc-value">
+                  1049 E Broad St, Columbus, OH 43205<br />
+                  Debre Selam Kidus Gabriel Orthodox Tewahedo Church
+                </span>
+              </div>
+            </div>
+
+            <div class="loc-row">
+              <div class="loc-icon">
+                <svg viewBox="0 0 24 24">
+                  <path stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <span class="loc-label">Service Hours</span>
+                <span class="loc-value">
+                  Sunday Liturgy: 7:00 AM – 12:00 PM<br />
+                  Bible Class: Wednesday, 9:00 pm – 10:30 pm (Online)
+                </span>
+              </div>
+            </div>
+
+            <div class="loc-row">
+              <div class="loc-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2
+                           2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div>
+                <span class="loc-label">Contact</span>
+                <span class="loc-value">
+                  <a href="/cdn-cgi/l/email-protection#50393e363f103235243529312235347e3f2237"><span class="__cf_email__" data-cfemail="84edeae2ebc4e6e1f0e1fde5f6e1e0aaebf6e3">[email&#160;protected]</span></a><br />
+                  <a href="tel:+16145550000">(614) 555-0000</a>
+                </span>
+              </div>
+            </div>
+
+            <div class="loc-row">
+              <div class="loc-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0
+                           002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2
+                           0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                </svg>
+              </div>
+              <div>
+                <span class="loc-label">Programs</span>
+                <span class="loc-value">
+                  All classes are free of charge.<br />
+                  Open to Orthodox youth of all ages.
+                </span>
+              </div>
+            </div>
+
+            <a href="#enroll"
+               class="btn-primary"
+               style="align-self:flex-start;margin-top:0.5rem;">
+              Register Today
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       VOICE
+  ═══════════════════════════════════════════ -->
+  <section id="voice" aria-labelledby="voice-heading">
+    <div class="sec-wrap" style="flex-direction:column;text-align:center;gap:0.5rem;">
+      <p class="section-eyebrow">Bete Yared's Voice</p>
+      <h2 class="voice-tagline" id="voice-heading">
+        &ldquo;The Unapologetic Truth,<br />
+        <em>for a Generation That Deserves It.</em>&rdquo;
+      </h2>
+      <p class="voice-sub">Ancient words. Honest voices. One faith.</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-brand">Bete Yared</div>
+    <p>Ethiopian Orthodox Tewahedo Youth Empowerment</p>
+    <p style="margin-top:0.85rem;">
+      1049 E Broad St, Columbus OH 43205 &nbsp;·&nbsp;
+      <a href="/cdn-cgi/l/email-protection#375e59515877555243524e5645525319584550"><span class="__cf_email__" data-cfemail="1a73747c755a787f6e7f637b687f7e3475687d">[email&#160;protected]</span></a>
+    </p>
+    <p style="margin-top:0.85rem;font-size:0.66rem;opacity:0.52;">
+      © 2026 Bete Yared &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp; Built with faith.
+    </p>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════════ -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    'use strict';
+
+    /* ── Navbar depth class ─────────────────────── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ── Mobile menu ────────────────────────────── */
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks   = document.getElementById('nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navLinks.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ── Parallax hero background ───────────────── */
+    var heroBg = document.querySelector('.hero-bg');
+    window.addEventListener('scroll', function() {
+      if (!heroBg) return;
+      heroBg.style.transform = 'translateY(' + (window.scrollY * 0.30) + 'px)';
+    }, { passive: true });
+
+    /* ── Card entrance animations ───────────────── */
+    var animCards = document.querySelectorAll('.dash-card, .class-card');
+    if ('IntersectionObserver' in window) {
+      var cardObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry, i) {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'cardIn 0.5s ' + (i * 0.07) + 's ease both';
+            cardObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      animCards.forEach(function(card) {
+        card.style.opacity = '0';
+        cardObs.observe(card);
+      });
+    }
+
+    /* ── Donation preset amounts ────────────────── */
+    var amountBtns  = document.querySelectorAll('.amount-btn');
+    var customInput = document.getElementById('custom-amount');
+
+    amountBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        amountBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        if (customInput) customInput.value = '';
+      });
+    });
+
+    if (customInput) {
+      customInput.addEventListener('input', function() {
+        amountBtns.forEach(function(b) { b.classList.remove('active'); });
+      });
+    }
+
+    /* ── Frequency toggle ───────────────────────── */
+    var freqBtns = document.querySelectorAll('.freq-btn');
+    var freqNote = document.getElementById('donate-freq-note');
+    var gbWidget = document.getElementById('givebutter-widget-container');
+
+    var freqCopy = {
+      once:    'A single gift, processed securely.',
+      monthly: 'Recurring — cancel any time from your account.'
+    };
+
+    freqBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        freqBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var val = btn.dataset.freq;
+        if (freqNote)  freqNote.textContent = freqCopy[val] || '';
+        if (gbWidget)  gbWidget.dataset.freq = val;
+        /* If GiveButter JS API is available:
+           if (window.Givebutter) Givebutter.setRecurring(val === 'monthly'); */
+      });
+    });
+
+    /* ── Enrollment form ────────────────────────── */
+    var enrollForm  = document.getElementById('enrollment-form');
+    var formSuccess = document.getElementById('form-success');
+
+    if (enrollForm) {
+      enrollForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var first = document.getElementById('f-first').value.trim();
+        var email = document.getE
